@@ -109,7 +109,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="ThemePopup.xaml">
+	  <MauiXaml Update="Views\ThemePopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
