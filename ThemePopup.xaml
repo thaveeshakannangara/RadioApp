@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:Animations="clr-namespace:Mopups.Animations;assembly=Mopups"
+                  xmlns:Mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  x:Class="AudioAppTests.ThemePopup"
+                  HasSystemPadding="True"
+                  BackgroundInputTransparent="False"
+                  BackgroundColor="{AppThemeBinding Light={StaticResource PopupBackgroundColorLight},
+                                        Dark={StaticResource PopupBackgroundColorDark}}"
+                  CloseWhenBackgroundIsClicked="True">
+
+    <Mopups:PopupPage.Animation>
+        <Animations:MoveAnimation PositionIn="Center" PositionOut="Center"
+                                  DurationOut="100" EasingIn="SpringIn" EasingOut="Linear"
+                                  HasBackgroundAnimation="True" />
+    </Mopups:PopupPage.Animation>
+
+    <Mopups:PopupPage.Content>
+
+        <Frame Padding="20" BorderColor="{AppThemeBinding Light=Transparent, Dark=LightGray}" HasShadow="False"
+           BackgroundColor="{AppThemeBinding Light=White,Dark={StaticResource PopupForegroundColorDark}}"
+           HorizontalOptions="Center" VerticalOptions="Center">
+
+            <Frame.HeightRequest>
+                <OnIdiom x:TypeArguments="x:Double">
+                    <OnIdiom.Phone>360</OnIdiom.Phone>
+                    <OnIdiom.Tablet>480</OnIdiom.Tablet>
+                </OnIdiom>
+            </Frame.HeightRequest>
+
+            <Frame.Margin>
+                <OnIdiom x:TypeArguments="Thickness">
+                    <OnIdiom.Phone>40,200,40,200</OnIdiom.Phone>
+                    <OnIdiom.Tablet>80,80,80,80</OnIdiom.Tablet>
+                </OnIdiom>
+            </Frame.Margin>
+
+
+            <VerticalStackLayout>
+                <Image x:Name="infoIcon" Source="{AppThemeBinding Light=closeblack.png, Dark=closewhite.png}" HeightRequest="25"
+                       Aspect="AspectFit" HorizontalOptions="End" Margin="0,0,5,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CloseButtonTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Grid Padding="15" RowSpacing="20" BackgroundColor="Transparent"
+                  HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" HorizontalOptions="StartAndExpand" Text="Select the Theme :" FontSize="18"
+                       TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource White}}"/>
+
+                    <Button Grid.Row="1" Text="Light" Clicked="Button_Clicked" HorizontalOptions="FillAndExpand"
+                        TextColor="{AppThemeBinding Light=White, Dark={StaticResource White}}">
+
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,0.5" StartPoint="0,0">
+                                <GradientStop Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource GreenColor1}}"/>
+                                <GradientStop Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource GreenColor2}}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Grid.Row="2" Text="Dark" Clicked="Button_Clicked_1" HorizontalOptions="FillAndExpand"
+                        TextColor="{AppThemeBinding Light=White, Dark={StaticResource GreenColor2}}"/>
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
+    </Mopups:PopupPage.Content>
+</Mopups:PopupPage>

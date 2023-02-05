@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:media="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="AudioAppTests.MainPage">
+
+    <Grid Margin="20" RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0">
+
+            <Grid>
+                <Label Text="Listening to " FontSize="24" FontFamily="NewYorkSmallBold" HorizontalOptions="Start"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource White}}" />
+
+                <Image x:Name="infoIcon" Source="{AppThemeBinding Light=infoblack.png, Dark=infowhite.png}" HeightRequest="25"
+                       Aspect="AspectFit" HorizontalOptions="End" Margin="0,0,5,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="InfoButtonTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+
+            <Label Text="Sanwedini " FontSize="32" FontFamily="NewYorkSmallBold"
+                   TextColor="{AppThemeBinding Light={StaticResource GreenColor2}, Dark={StaticResource GreenColor1}}"
+                              FontAttributes="Italic" />
+
+            <Label Text="Internet Radio.." FontSize="24" FontFamily="NewYorkSmallBold"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource White}}" />
+
+            <HorizontalStackLayout Spacing="10">
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <BoxView Grid.Row="1" HeightRequest="1" Color="{StaticResource Gray100}" Margin="0,20,0,0" />
+
+        <VerticalStackLayout Grid.Row="2" Spacing="25"  VerticalOptions="Center">
+
+            <media:MediaElement x:Name="mediaElement" HeightRequest="0"
+                ShouldShowPlaybackControls="False" ShouldAutoPlay="False"
+                Source="http://mediaserv30.live-streams.nl:8086/live" />
+
+            <skia:SKLottieView x:Name="skLottieView" Source="{AppThemeBinding Light=headset.json, Dark=headset.json}"
+                RepeatCount="-1" HeightRequest="270" WidthRequest="270" IsVisible="False"
+                HorizontalOptions="Center" />
+
+            <Image x:Name="playThumbnail" Source="playheadset.png" HeightRequest="200" 
+                       Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0"/>
+
+        </VerticalStackLayout>
+
+        <BoxView Grid.Row="3" HeightRequest="1" Color="{StaticResource Gray100}" Margin="0,0,0,30" />
+
+        <VerticalStackLayout Grid.Row="4">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Image x:Name="volumeIcon" Grid.Column="0" Source="{AppThemeBinding Light=speakerblack.png, Dark=speakerwhite.png}" HeightRequest="20"
+                       Aspect="AspectFit" HorizontalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MuteButtonTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Slider x:Name="volumeSlider" Grid.Column="1" Minimum="0" Maximum="1" Value="0.5"
+                MaximumTrackColor="{StaticResource Gray200}" MinimumTrackColor="{StaticResource GreenColor2}"
+                BackgroundColor="Transparent" ThumbColor="{StaticResource GreenColor1}"
+                ValueChanged="VolumeChanged" />
+
+                <Label x:Name="volumeText" Grid.Column="2" Text="50%" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+            </Grid>
+
+            <HorizontalStackLayout  HorizontalOptions="Center" Margin="0,20,0,50">
+                <Image x:Name="playIcon" Source="play_edited.png" HeightRequest="75" Aspect="AspectFit" HorizontalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PlayButtonTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
